@@ -50,7 +50,7 @@ const typeDefs = gql`
   type Mutation {
     bookTrips(
       launchIds: [ID]!
-      paymentToker: String
+      paymentToken: String
     ): TripUpdateResponse!
     cancelTrip(launchId: ID!): TripUpdateResponse!
     login(email: String): User # login token
@@ -60,6 +60,23 @@ const typeDefs = gql`
     success: Boolean!
     message: String
     launches: [Launch]
+    charge: Charge
+  }
+
+  type Charge {
+    amount: Float!
+    currency: ChargeCurrency!
+    status: ChargeStatus
+  }
+
+  enum ChargeCurrency{
+    usd
+  }
+
+  enum ChargeStatus {
+    succeeded
+    pending
+    failed
   }
   
   type LaunchConnection { # add this below the Query type as an additional type.
