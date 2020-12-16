@@ -42,14 +42,22 @@ module.exports = {
           launchIds,
         });
 
-        const stripe = require('stripe')('sk_test_51Hz0M9EFOSIpEmcfeSxkVVYPtyj6At9WmJbXc50NE44UY8vsoqMWyrCH9ZN8IYFFLCtvfO6do3R0vyka39JgHl6Q00aGB9a24M');
+        let charge;
+        if(launches.length){
+          try{
+            const stripe = require('stripe')(process.env.STRIPE_SECRET_API_KEY);
 
-        const charge = await stripe.charges.create({
-          amount: 2000,
-          currency: 'usd',
-          source: paymentToken,
-          description: 'My First Test Charge (created for API docs)',
-        });
+             charge = await stripe.charges.create({
+              amount: launches.length * 1000,
+              currency: 'usd',
+              source: paymentToken,
+              description: 'SpaceX launches booking',
+            });
+          }catch(err){
+            throw new Error(err);
+          }
+
+        }
         
         console.log(charge)
         return {
@@ -61,6 +69,7 @@ module.exports = {
                   id => !results.includes(id),
                 )}`,
           launches,
+          charge
         };
       },
       cancelTrip: async (_, { launchId }, { dataSources }) => {
