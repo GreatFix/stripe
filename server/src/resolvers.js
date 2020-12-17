@@ -43,6 +43,7 @@ module.exports = {
         });
 
         let charge;
+        console.log('paymentToken'+paymentToken)
         if(launches.length){
           try{
             const stripe = require('stripe')(process.env.STRIPE_SECRET_API_KEY);
@@ -115,5 +116,8 @@ module.exports = {
         );
     },
     },
+    Charge:{
+      amount: ({amount})=> amount / 100,
+    }
   };
   
