@@ -47,7 +47,11 @@ const BookTrips: React.FC<BookTripsProps> = ({ cartItems }) => {
 
     const card = elements.getElement(CardElement);
 
-    const result = await stripe.createToken(card);
+    let result:any;
+    
+    card ? result = await stripe.createToken(card)
+    : console.log("card undefined");
+
 
     if (result.error) {
         console.log(result.error)
