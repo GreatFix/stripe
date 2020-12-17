@@ -9,7 +9,7 @@ import { GetCartItems } from './__generated__/GetCartItems';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_51Hz0M9EFOSIpEmcfLAQ29T77q1EWmlOmPeGGwAnA0Hq2w4ePdQ5ZjkSpuwClbzM8ERAjFN7QG4cduzlddtsDU1HZ001y6FzX3e');
+const stripePromise = loadStripe('pk_test_51Hz0M9EFOSIpEmcfLAQ29T77q1EWmlOmPeGGwAnA0Hq2w4ePdQ5ZjkSpuwClbzM8ERAjFN7QG4cduzlddtsDU1HZ001y6FzX3e');//STRIPE_PUBLISH_API_KEY
 
 export const GET_CART_ITEMS = gql`
   query GetCartItems {
